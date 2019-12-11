@@ -21,7 +21,7 @@ app.get("/api/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "/db/db.json"));
 });
 
-app.get("/index", function (req, res) {
+app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
