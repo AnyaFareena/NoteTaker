@@ -15,7 +15,8 @@ app.use(express.static("db"));
 
 app.get("/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "/public/notes.html"));
-});
+
+    });
 
 app.get("/api/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "/db/db.json"));
@@ -38,13 +39,15 @@ app.post("/api/notes", function (req, res) {
         fs.writeFile(path.join(__dirname, "/db/db.json"), JSON.stringify(notes), function () {
         });
     });
+    res.sendFile(path.join(__dirname, "/public/notes.html"));
+
 });
 
 app.delete("/api/notes/:id", function (req, res) {
     fs.readFile(path.join(__dirname, "/db/db.json"), function (err, data) {
         notes = JSON.parse(data);
         fs.writeFile(path.join(__dirname, "/db/db.json"), JSON.stringify(notes.filter(note => note.id != req.params.id)), () => { console.log(`Note deleted`) });
-
+        res.sendFile(path.join(__dirname, "/public/notes.html"));
     });
 });
 
